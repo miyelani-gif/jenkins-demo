@@ -8,11 +8,9 @@ spec:
   serviceAccountName: default
   containers:
   - name: kaniko
-    image: gcr.io/kaniko-project/executor:latest
+    image: gcr.io/kaniko-project/executor:debug
     command:
-    - sleep
-    args:
-    - "9999999"
+    - cat
     tty: true
     volumeMounts:
     - name: docker-config
@@ -41,13 +39,13 @@ spec:
         stage('Build & Push Image') {
             steps {
                 container('kaniko') {
-                    sh """
+                    sh '''
                     /kaniko/executor \
                       --dockerfile=Dockerfile \
                       --context=. \
                       --destination=$IMAGE_NAME \
                       --skip-tls-verify
-                    """
+                    '''
                 }
             }
         }
