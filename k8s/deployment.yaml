@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: demo-app
-        image: nginx:1.25.5
+        image: miyelani/jenkins-demo:latest
         ports:
         - containerPort: 80
