@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: demo-app
-        image: registry.k8s.io/nginx-slim:0.8
+        image: nginx:1.25.5
         ports:
         - containerPort: 80
