@@ -1,22 +1,16 @@
 pipeline {
-    agent any
+    agent {
+        kubernetes {
+            defaultContainer 'kubectl'
+        }
+    }
 
     stages {
-        stage('Build') {
+        stage('Deploy to K8s') {
             steps {
-                echo 'Building application...'
-            }
-        }
-
-        stage('Test') {
-            steps {
-                echo 'Running tests...'
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                echo 'Deploying app...'
+                sh 'kubectl get nodes'
+                sh 'kubectl apply -f k8s/deployment.yaml'
+                sh 'kubectl apply -f k8s/service.yaml'
             }
         }
     }
