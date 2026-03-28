@@ -8,7 +8,7 @@ spec:
   serviceAccountName: default
   containers:
   - name: kubectl
-    image: bitnami/kubectl:latest
+    image: lachlanevenson/k8s-kubectl:latest
     command:
     - cat
     tty: true
@@ -22,9 +22,12 @@ spec:
         stage('Deploy to K8s') {
             steps {
                 container('kubectl') {
-                    sh 'kubectl get pods'
-                    sh 'kubectl apply -f k8s/deployment.yaml'
-                    sh 'kubectl apply -f k8s/service.yaml'
+                    sh '''
+                      kubectl version --client
+                      kubectl get pods
+                      kubectl apply -f k8s/deployment.yaml
+                      kubectl apply -f k8s/service.yaml
+                    '''
                 }
             }
         }
