@@ -10,7 +10,9 @@ spec:
   - name: kaniko
     image: gcr.io/kaniko-project/executor:latest
     command:
-    - cat
+    - sleep
+    args:
+    - "9999999"
     tty: true
     volumeMounts:
     - name: docker-config
@@ -44,7 +46,6 @@ spec:
                       --dockerfile=Dockerfile \
                       --context=. \
                       --destination=$IMAGE_NAME \
-                      --insecure \
                       --skip-tls-verify
                     """
                 }
